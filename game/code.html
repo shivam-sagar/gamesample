@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+<title>Game</title>
+</head>
+<body>
+<h1>Game</h1>
+<b><p>You have <span id="amtvalue"><b>1000</b></span> INR</p>
+<p><input type = "button" onclick = "onStart()" value = "Start"></p>
+<p id = "generatedNos"></p>
+<p id = "message"></p></b>
+<script>
+funcForRandNumbers = function()
+{	
+	return Math.floor(Math.random() * 10);
+}
+
+var amt = 1000;
+
+onStart  = function()
+{
+	if (amt == 0)
+	{
+		return;
+	}
+	amt = amt - 100;
+	var a = funcForRandNumbers();
+	var b = funcForRandNumbers();
+	var c = funcForRandNumbers();
+	document.getElementById("generatedNos").innerHTML = a + " " + b + " " + c;
+	if (amt < 100)
+	{
+		document.getElementById("message").innerHTML = "Game Over. Refresh to restart the game";
+	}
+	else if ((a%2 == 0 && b%2 == 0 && c%2 == 0) || (a%2 != 0 && b%2 != 0 && c%2 != 0))
+	{
+		amt = amt + 300;
+		document.getElementById("message").innerHTML = "You have won 300 INR as all numbers are either even or odd";
+	}	
+	else if ((a != b && b != c && c != a) && ((Math.abs(a-b) == 1 && Math.abs(b-c) == 1) || (Math.abs(a-c) == 1
+ && Math.abs(b-c) == 1)))
+	{
+		amt = amt + 800;
+		document.getElementById("message").innerHTML = "You have won 800 INR as mumbers are in sequence with difference of 1";
+	}
+	else if (a == b && b == c)
+	{
+		amt = amt + 1000;
+		document.getElementById("message").innerHTML = "You have won 1000 INR as all the numbers are same";
+	}
+	else
+	{
+		document.getElementById("message").innerHTML = "You were not lucky this time";
+	}
+	document.getElementById("amtvalue").innerHTML = amt;
+}
+</script>
+</body>
+</html>
